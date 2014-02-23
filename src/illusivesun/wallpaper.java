@@ -1,5 +1,7 @@
 package illusivesun;
 
+import java.util.ArrayList;
+
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
 
@@ -27,6 +29,10 @@ public class wallpaper extends WallpaperService {
 		private boolean visible = true;
 		private int maxNum;
 		private boolean touchOn;
+		
+		public wallEngine() {
+			circles = new ArrayList<MyPoint>();
+		}
 		
 	}
 
