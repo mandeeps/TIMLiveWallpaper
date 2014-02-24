@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 
 // http://www.vogella.com/tutorials/AndroidLiveWallpaper/article.html
 public class wallpaper extends WallpaperService {
@@ -54,19 +56,29 @@ public class wallpaper extends WallpaperService {
 				handler.removeCallbacks(drawRun);
 			}
 		}
-	}
 	
-	@Override
-	public void onSurfaceDestroyed(SurfaceHolder holder) {
-		super.onSurfaceDestroyed(holder);
-		this.visible = false;
-		handler.removeCallbacks(drawRun);
-	}
+		@Override
+		public void onSurfaceDestroyed(SurfaceHolder holder) {
+			super.onSurfaceDestroyed(holder);
+			this.visible = false;
+			handler.removeCallbacks(drawRun);
+		}
+		
+		@Override void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+			this.width = width;
+			this.height = height;
+			super.onSurfaceChanged(holder, format, width, height);
+		}
+		
+		@Override
+		public void onTouchEvent(MotionEvent event) {
+			if (touchOn) {
+				float x = event.getX();
+				float y = event.getY();
+				SurfaceHolder holder = getSurfaceHolder();
+			}
+		}
 	
-	@Override void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		this.width = width;
-		this.height = height;
-		super.onSurfaceChanged(holder, format, width, height);
 	}
 
 }
