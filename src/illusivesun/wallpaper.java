@@ -64,7 +64,8 @@ public class wallpaper extends WallpaperService {
 			handler.removeCallbacks(drawRun);
 		}
 		
-		@Override void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+		@Override 
+		public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 			this.width = width;
 			this.height = height;
 			super.onSurfaceChanged(holder, format, width, height);
@@ -76,7 +77,26 @@ public class wallpaper extends WallpaperService {
 				float x = event.getX();
 				float y = event.getY();
 				SurfaceHolder holder = getSurfaceHolder();
+				Canvas canvas = null;
+				try {
+					canvas = holder.lockCanvas();
+					if (canvas != null) {
+						canvas.drawColor(Color.GREEN);
+						circles.clear();
+						circles.add(new MyPoint(String.valueOf(circles.size() + 2), x, y));
+						drawCircles(canvas, circles);
+					}
+				} finally {
+					if (canvas != null)
+						holder.unlockCanvasAndPost(canvas);
+					}
+					super.onTouchEvent(event);
+				}
 			}
+		
+		private void draw() {
+			SurfaceHolder holder = getSurfaceHolder();
+			Canvas canvas = null;
 		}
 	
 	}
