@@ -97,6 +97,21 @@ public class wallpaper extends WallpaperService {
 		private void draw() {
 			SurfaceHolder holder = getSurfaceHolder();
 			Canvas canvas = null;
+			try {
+				canvas = holder.lockCanvas();
+				if (canvas != null) {
+					if (circles.size() >= maxNum) {
+						circles.clear;
+					}
+					int x = (int) (width * Math.random());
+					int y = (int) (height * Math.random());
+					circles.add(new MyPoint(String.valueOf(circles.size()+1), x, y));
+					drawCircles(canvas, circles);
+				}
+			} finally {
+				if (canvas != null) 
+					holder.unlockCanvasAndPost(canvas);
+			}
 		}
 	
 	}
