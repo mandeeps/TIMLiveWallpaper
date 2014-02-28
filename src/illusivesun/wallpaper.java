@@ -112,6 +112,14 @@ public class wallpaper extends WallpaperService {
 				if (canvas != null) 
 					holder.unlockCanvasAndPost(canvas);
 			}
+			handler.removeCallbacks(drawRun);
+			if (visible) {
+				handler.postDelayed(drawRun, 5000);
+			}
+		}
+		
+		private void drawCircles(Canvas canvas, List<MyPoint> circles) {
+			
 		}
 	
 	}
