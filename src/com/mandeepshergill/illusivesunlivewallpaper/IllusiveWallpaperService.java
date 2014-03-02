@@ -1,6 +1,7 @@
-package illusivesun;
+package com.mandeepshergill.illusivesunlivewallpaper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.graphics.Color;
 import android.graphics.Canvas;
@@ -11,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 // http://www.vogella.com/tutorials/AndroidLiveWallpaper/article.html
-public class wallpaper extends WallpaperService {
+public class IllusiveWallpaperService extends WallpaperService {
 
 	@Override
 	public Engine onCreateEngine() {
@@ -44,7 +45,7 @@ public class wallpaper extends WallpaperService {
 			paint.setStyle(Paint.Style.STROKE);
 			paint.setStrokeJoin(Paint.Join.ROUND);
 			paint.setStrokeWidth(10f);
-			handler.post(drawRunner);
+			handler.post(drawRun);
 		}
 		
 		@Override
@@ -83,7 +84,7 @@ public class wallpaper extends WallpaperService {
 					if (canvas != null) {
 						canvas.drawColor(Color.GREEN);
 						circles.clear();
-						circles.add(new MyPoint(String.valueOf(circles.size() + 2), x, y));
+						circles.add(new MyPoint(String.valueOf(circles.size() + 1), x, y));
 						drawCircles(canvas, circles);
 					}
 				} finally {
@@ -101,7 +102,7 @@ public class wallpaper extends WallpaperService {
 				canvas = holder.lockCanvas();
 				if (canvas != null) {
 					if (circles.size() >= maxNum) {
-						circles.clear;
+						circles.clear();
 					}
 					int x = (int) (width * Math.random());
 					int y = (int) (height * Math.random());
@@ -119,7 +120,10 @@ public class wallpaper extends WallpaperService {
 		}
 		
 		private void drawCircles(Canvas canvas, List<MyPoint> circles) {
-			
+			canvas.drawColor(Color.BLACK);
+			for (MyPoint point:circles) {
+				canvas.drawCircle(point.x, point.y, 20.0f, paint);
+			}
 		}
 	
 	}
