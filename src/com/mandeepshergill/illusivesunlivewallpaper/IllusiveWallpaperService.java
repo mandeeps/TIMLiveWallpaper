@@ -3,6 +3,8 @@ package com.mandeepshergill.illusivesunlivewallpaper;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -35,8 +37,11 @@ public class IllusiveWallpaperService extends WallpaperService {
 		private boolean visible = true;
 		private int maxNum;
 		private boolean touchOn;
+		private Bitmap backdrop;
 		
 		public wallEngine() {
+			backdrop = BitmapFactory.decodeResource(getResources(), R.drawable.illusive);
+			
 			maxNum = 20;
 			touchOn = true;
 			circles = new ArrayList<MyPoint>();
@@ -101,6 +106,7 @@ public class IllusiveWallpaperService extends WallpaperService {
 			try {
 				canvas = holder.lockCanvas();
 				if (canvas != null) {
+					canvas.drawBitmap(backdrop, 0, 0, null);
 					if (circles.size() >= maxNum) {
 						circles.clear();
 					}
@@ -120,7 +126,7 @@ public class IllusiveWallpaperService extends WallpaperService {
 		}
 		
 		private void drawCircles(Canvas canvas, List<MyPoint> circles) {
-			canvas.drawColor(Color.BLACK);
+			canvas.drawBitmap(backdrop, 0, 0, null);
 			for (MyPoint point:circles) {
 				canvas.drawCircle(point.x, point.y, 20.0f, paint);
 			}
