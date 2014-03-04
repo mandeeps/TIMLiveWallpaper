@@ -112,8 +112,8 @@ public class IllusiveWallpaperService extends WallpaperService {
 					}
 					int x = (int) (width * Math.random());
 					int y = (int) (height * Math.random());
-					circles.add(new MyPoint(String.valueOf(circles.size()+1), x, y));
-					drawCircles(canvas, circles);
+					//circles.add(new MyPoint(String.valueOf(circles.size()+1), x, y));
+					//drawCircles(canvas, circles);
 				}
 			} finally {
 				if (canvas != null) 
@@ -127,9 +127,9 @@ public class IllusiveWallpaperService extends WallpaperService {
 		
 		private void drawCircles(Canvas canvas, List<MyPoint> circles) {
 			canvas.drawBitmap(backdrop, 0, 0, null);
-			for (MyPoint point:circles) {
-				canvas.drawCircle(point.x, point.y, 20.0f, paint);
-			}
+			//for (MyPoint point:circles) {
+			//	canvas.drawCircle(point.x, point.y, 20.0f, paint);
+			//}
 		}
 	
 	}
