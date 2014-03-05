@@ -30,26 +30,27 @@ public class IllusiveWallpaperService extends WallpaperService {
 			}
 		};
 		
-		private List<MyPoint> circles;
+		//private List<MyPoint> circles;
 		private Paint paint = new Paint();
 		private int width;
 		int height;
 		private boolean visible = true;
-		private int maxNum;
-		private boolean touchOn;
+		//private int maxNum;
+		//private boolean touchOn;
 		private Bitmap backdrop;
 		
 		public wallEngine() {
 			backdrop = BitmapFactory.decodeResource(getResources(), R.drawable.illusive);
 			
-			maxNum = 20;
-			touchOn = true;
-			circles = new ArrayList<MyPoint>();
+			//maxNum = 20;
+			//touchOn = true;
+			//circles = new ArrayList<MyPoint>();
 			paint.setAntiAlias(true);
-			paint.setColor(Color.RED);
-			paint.setStyle(Paint.Style.STROKE);
-			paint.setStrokeJoin(Paint.Join.ROUND);
-			paint.setStrokeWidth(10f);
+			paint.setFilterBitmap(true);
+			//paint.setColor(Color.RED);
+			//paint.setStyle(Paint.Style.STROKE);
+			//paint.setStrokeJoin(Paint.Join.ROUND);
+			//paint.setStrokeWidth(10f);
 			handler.post(drawRun);
 		}
 		
@@ -77,28 +78,28 @@ public class IllusiveWallpaperService extends WallpaperService {
 			super.onSurfaceChanged(holder, format, width, height);
 		}
 		
-		@Override
-		public void onTouchEvent(MotionEvent event) {
-			if (touchOn) {
-				float x = event.getX();
-				float y = event.getY();
-				SurfaceHolder holder = getSurfaceHolder();
-				Canvas canvas = null;
-				try {
-					canvas = holder.lockCanvas();
-					if (canvas != null) {
-						canvas.drawColor(Color.GREEN);
-						circles.clear();
-						circles.add(new MyPoint(String.valueOf(circles.size() + 1), x, y));
-						drawCircles(canvas, circles);
-					}
-				} finally {
-					if (canvas != null)
-						holder.unlockCanvasAndPost(canvas);
-					}
-					super.onTouchEvent(event);
-				}
-			}
+//		@Override
+//		public void onTouchEvent(MotionEvent event) {
+//			if (touchOn) {
+//				//float x = event.getX();
+//				//float y = event.getY();
+//				SurfaceHolder holder = getSurfaceHolder();
+//				Canvas canvas = null;
+//				try {
+//					canvas = holder.lockCanvas();
+//					//if (canvas != null) {
+//						//canvas.drawColor(Color.GREEN);
+//						//circles.clear();
+//						//circles.add(new MyPoint(String.valueOf(circles.size() + 1), x, y));
+//						//drawCircles(canvas, circles);
+//					//}
+//				} finally {
+//					if (canvas != null)
+//						holder.unlockCanvasAndPost(canvas);
+//					}
+//					super.onTouchEvent(event);
+//				}
+//			}
 		
 		private void draw() {
 			SurfaceHolder holder = getSurfaceHolder();
@@ -106,12 +107,12 @@ public class IllusiveWallpaperService extends WallpaperService {
 			try {
 				canvas = holder.lockCanvas();
 				if (canvas != null) {
-					canvas.drawBitmap(backdrop, 0, 0, null);
-					if (circles.size() >= maxNum) {
-						circles.clear();
-					}
-					int x = (int) (width * Math.random());
-					int y = (int) (height * Math.random());
+					canvas.drawBitmap(backdrop, 0, 0, paint);
+					//if (circles.size() >= maxNum) {
+					//	circles.clear();
+					//}
+					//int x = (int) (width * Math.random());
+					//int y = (int) (height * Math.random());
 					//circles.add(new MyPoint(String.valueOf(circles.size()+1), x, y));
 					//drawCircles(canvas, circles);
 				}
