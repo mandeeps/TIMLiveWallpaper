@@ -3,15 +3,19 @@ package com.mandeepshergill.illusivesunlivewallpaper;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.view.WindowManager;
 
 // http://www.vogella.com/tutorials/AndroidLiveWallpaper/article.html
 public class IllusiveWallpaperService extends WallpaperService {
@@ -32,16 +36,21 @@ public class IllusiveWallpaperService extends WallpaperService {
 		
 		//private List<MyPoint> circles;
 		private Paint paint = new Paint();
-		private int width;
-		int height;
+		//private int width;
+		//int height;
 		private boolean visible = true;
 		//private int maxNum;
 		//private boolean touchOn;
 		private Bitmap backdrop;
 		
 		public wallEngine() {
-			backdrop = BitmapFactory.decodeResource(getResources(), R.drawable.illusive);
+			WindowManager wm = (WindowManager) getBaseContext().getSystemService(Context.WINDOW_SERVICE);
+			Display display = wm.getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size); 
 			
+			backdrop = BitmapFactory.decodeResource(getResources(), R.drawable.illusive);
+			backdrop = Bitmap.createScaledBitmap(backdrop, size.x, size.y, true);
 			//maxNum = 20;
 			//touchOn = true;
 			//circles = new ArrayList<MyPoint>();
@@ -71,12 +80,12 @@ public class IllusiveWallpaperService extends WallpaperService {
 			handler.removeCallbacks(drawRun);
 		}
 		
-		@Override 
-		public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-			this.width = width;
-			this.height = height;
-			super.onSurfaceChanged(holder, format, width, height);
-		}
+//		@Override 
+//		public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+//			this.width = width;
+//			this.height = height;
+//			super.onSurfaceChanged(holder, format, width, height);
+//		}
 		
 //		@Override
 //		public void onTouchEvent(MotionEvent event) {
@@ -126,12 +135,12 @@ public class IllusiveWallpaperService extends WallpaperService {
 			}
 		}
 		
-		private void drawCircles(Canvas canvas, List<MyPoint> circles) {
-			canvas.drawBitmap(backdrop, 0, 0, null);
-			//for (MyPoint point:circles) {
-			//	canvas.drawCircle(point.x, point.y, 20.0f, paint);
-			//}
-		}
+//		private void drawCircles(Canvas canvas, List<MyPoint> circles) {
+//			canvas.drawBitmap(backdrop, 0, 0, null);
+//			//for (MyPoint point:circles) {
+//			//	canvas.drawCircle(point.x, point.y, 20.0f, paint);
+//			//}
+//		}
 	
 	}
 
