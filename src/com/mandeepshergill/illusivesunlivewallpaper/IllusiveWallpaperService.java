@@ -50,7 +50,7 @@ public class IllusiveWallpaperService extends WallpaperService {
 			display.getSize(size); 
 			
 			backdrop = BitmapFactory.decodeResource(getResources(), R.drawable.illusive);
-			backdrop = Bitmap.createScaledBitmap(backdrop, size.x, size.y, true);
+			backdrop = Bitmap.createScaledBitmap(backdrop, (backdrop.getWidth()/3), (backdrop.getHeight()/2), true);
 			//maxNum = 20;
 			//touchOn = true;
 			//circles = new ArrayList<MyPoint>();
